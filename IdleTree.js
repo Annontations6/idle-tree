@@ -5,13 +5,13 @@ import { theory } from "./api/Theory";
 import { Utils } from "./api/Utils";
 
 var id = "my_custom_theory_id";
-var name = "My Custom Theory";
+var name = "Idle tree";
 var description = "A basic theory.";
-var authors = "Gilles-Philippe Paillé";
+var authors = "Annontations6";
 var version = 1;
 
 var currency;
-var c1, c2;
+var c1, c2, c3;
 var c1Exp, c2Exp;
 
 var achievement1, achievement2;
@@ -32,6 +32,15 @@ var init = () => {
     }
 
     // c2
+    {
+        let getDesc = (level) => "c_2=2^{" + level + "}";
+        let getInfo = (level) => "c_2=" + getC2(level).toString(0);
+        c2 = theory.createUpgrade(1, currency, new ExponentialCost(5, Math.log2(10)));
+        c2.getDescription = (_) => Utils.getMath(getDesc(c2.level));
+        c2.getInfo = (amount) => Utils.getMathTo(getInfo(c2.level), getInfo(c2.level + amount));
+    }
+
+    // c3
     {
         let getDesc = (level) => "c_2=2^{" + level + "}";
         let getInfo = (level) => "c_2=" + getC2(level).toString(0);
